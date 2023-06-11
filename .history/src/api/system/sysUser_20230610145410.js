@@ -4,11 +4,11 @@
 */
 import request from '@/utils/request'
 
-const api_name = '/admin/system/sysRole'
+const api_name = '/admin/system/sysUser'
 
 export default {
     // 分页获取角色信息
-    getSysRolePageList(page, limit, searchObj) {
+    getSysUserPageList(page, limit, searchObj) {
         return request({
             url: `${api_name}/${page}/${limit}`,
             method: 'get',
@@ -18,57 +18,42 @@ export default {
         })
     },
 
-    // 删除角色信息
+    // 删除用户信息
     removeById(id) {
         return request({
             url: `${api_name}/remove/${id}`,
             method: 'post',
         })
     },
-    //新增角色信息
-    save(sysRole) {
+    //新增用户信息
+    save(sysUser) {
         return request({
             url: `${api_name}/save`,
             method: 'post',
-            data: sysRole
+            data: sysUser
         })
     },
-    //根据id获取角色信息
+    //根据id获取用户信息
     getById(id) {
         return request({
             url: `${api_name}/get/${id}`,
             method: 'get',
         })
     },
-    //修改角色信息
-    updateById(sysRole) {
+    //修改用户信息
+    updateById(sysUser) {
         return request({
             url: `${api_name}/update`,
             method: 'post',
-            data: sysRole
+            data: sysUser
         })
     },
-    // 批量删除角色信息
-    batchRemove(ids) {
+    //修改用户状态
+    updateStatus(id,status) {
         return request({
-            url: `${api_name}/batchRemove`,
+            url: `${api_name}/update/${id}/`,
             method: 'post',
-            data: ids
-        })
-    },
-    // 获取用户角色
-    toAssign(id) {
-        return request({
-            url: `${api_name}/toAssign/${id}`,
-            method: 'get',
-        })
-    },
-    // 修改用户角色
-    doAssign(assignRoleVo) {
-        return request({
-            url: `${api_name}/doAssign`,
-            method: 'post',
-            data: assignRoleVo
+            data: sysUser
         })
     },
 }

@@ -106,13 +106,6 @@
             @click="removeDataById(scope.row.id)"
             title="删除"
           />
-          <el-button
-            type="warning"
-            icon="el-icon-baseball"
-            size="mini"
-            @click="showAssignRole(scope.row)"
-            title="分配角色"
-          />
         </template>
       </el-table-column>
     </el-table>
@@ -263,7 +256,7 @@ export default {
       dialogVisible: false,
       sysUser: defaultForm,
       saveBtnDisabled: false,
-      dialogRoleVisible: false,
+
       allRoles: [], // 所有角色列表
       userRoleIds: [], // 用户的角色ID的列表
       isIndeterminate: false, // 是否是不确定的
@@ -443,19 +436,19 @@ export default {
     // 展示用户角色
     showAssignRole(row) {
       this.sysUser = row;
-      this.dialogRoleVisible = true;
+      this.dialogVisible = true;
       this.getRoles();
     },
     // 获取用户角色
     getRoles() {
       roleApi.toAssign(this.sysUser.id).then((response) => {
-        const { allSysRoles, assignSysRoles } = response.data;
-        this.allRoles = allSysRoles;
-        this.userRoleIds = assignSysRoles.map((item) => item.id);
-        this.checkAll = allSysRoles.length === assignSysRoles.length;
+        const { allRolesList, assginRoleList } = response.data;
+        this.allRoles = allRolesList;
+        this.userRoleIds = assginRoleList.map((item) => item.id);
+        this.checkAll = allRolesList.length === assginRoleList.length;
         this.isIndeterminate =
-          assignSysRoles.length > 0 &&
-          assignSysRoles.length < allSysRoles.length;
+          assginRoleList.length > 0 &&
+          assginRoleList.length < allRolesList.length;
       });
     },
     //全选勾选状态发生改变的监听
@@ -484,7 +477,7 @@ export default {
       };
       roleApi.doAssign(assginRoleVo).then((response) => {
         this.$message.success(response.message || "分配角色成功");
-        this.dialogRoleVisible = false;
+        this.dialogVisible = false;
         this.fetchData(this.page);
       });
     },
@@ -494,7 +487,7 @@ export default {
       api.updateStatus(row.id, row.status).then((response) => {
         if (response.code) {
           this.$message.success(response.message || "操作成功");
-          this.dialogRoleVisible = false;
+          this.dialogVisible = false;
           this.fetchData();
         }
       });

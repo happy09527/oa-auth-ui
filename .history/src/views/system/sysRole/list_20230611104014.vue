@@ -80,13 +80,6 @@
             @click="removeDataById(scope.row.id)"
             title="删除"
           />
-          <el-button
-            type="warning"
-            icon="el-icon-baseball"
-            size="mini"
-            @click="showAssignAuth(scope.row)"
-            title="分配权限"
-          />
         </template>
       </el-table-column>
     </el-table>
@@ -96,11 +89,9 @@
       :current-page="page"
       :total="total"
       :page-size="limit"
-      :page-sizes="[5, 10, 20, 30, 40, 50, 100]"
       style="padding: 30px 0; text-align: center"
-      layout="sizes, prev, pager, next, jumper, ->, total, slot"
+      layout="total, prev, pager, next, jumper"
       @current-change="fetchData"
-      @size-change="changeSize"
     />
 
     <!-- 弹框 -->
@@ -148,7 +139,7 @@ export default {
       roleList: [], // 列表
       total: 0, // 总记录数
       page: 1, // 页码
-      limit: 5, // 每页记录数
+      limit: 3, // 每页记录数
       searchObj: {}, // 查询条件
       dialogVisible: false, // 弹框是否可见
       sysRole: {}, //接收表单的值
@@ -161,23 +152,12 @@ export default {
     this.fetchData();
   },
   methods: {
-    // 跳转到分配菜单的页面
-    showAssignAuth(row) {
-      this.$router.push(
-        "/system/assignAuth?id=" + row.id + "&roleName=" + row.roleName
-      );
-    },
-
-    // 当页码发生改变的时候
-    changeSize(size) {
-      console.log(size);
-      this.limit = size;
-      this.fetchData(1);
-    },
+    
     // 重置查询表单
     resetData() {
       console.log("重置查询表单");
       this.searchObj = {};
+      this.createTimes = [];
       this.fetchData();
     },
 
@@ -271,24 +251,22 @@ export default {
       });
     },
     batchRemove() {
-      if (this.multipleSelection.length == 0) {
+      if(this.multipleSelection.length ==0){
         this.$message.warning("请选择要批量删除的内容");
-        return;
+        return
       }
       this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
+        confirmButtonText : "确定",
+        cancelButtonText : "取消",
         type: "warning",
-      })
-        .then(() => {
-          //数组形式传递id值
-          var idList = [];
-          this.multipleSelection.forEach((item) => {
-            idList.push(item.id);
-          });
-          return api.batchRemove(idList);
+      }).then(()=>{
+        //数组形式传递id值
+        var idList = [];
+        this.multipleSelection.forEach(item =>{
+          idList.push(item.id)
         })
-        .then((response) => {
+        return api.batchRemove(idList)
+      }).then((response) => {
           this.fetchData();
           this.$message({
             type: "success",

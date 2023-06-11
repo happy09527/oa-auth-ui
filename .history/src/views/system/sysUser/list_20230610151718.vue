@@ -204,9 +204,7 @@
         <el-button type="primary" @click="assignRole" size="small"
           >保存</el-button
         >
-        <el-button @click="dialogRoleVisible = false" size="small"
-          >取消</el-button
-        >
+        <el-button @click="dialogRoleVisible = false" size="small">取消</el-button>
       </div>
     </el-dialog>
   </div>
@@ -449,13 +447,13 @@ export default {
     // 获取用户角色
     getRoles() {
       roleApi.toAssign(this.sysUser.id).then((response) => {
-        const { allSysRoles, assignSysRoles } = response.data;
-        this.allRoles = allSysRoles;
-        this.userRoleIds = assignSysRoles.map((item) => item.id);
-        this.checkAll = allSysRoles.length === assignSysRoles.length;
+        const { allRolesList, assginRoleList } = response.data;
+        this.allRoles = allRolesList;
+        this.userRoleIds = assginRoleList.map((item) => item.id);
+        this.checkAll = allRolesList.length === assginRoleList.length;
         this.isIndeterminate =
-          assignSysRoles.length > 0 &&
-          assignSysRoles.length < allSysRoles.length;
+          assginRoleList.length > 0 &&
+          assginRoleList.length < allRolesList.length;
       });
     },
     //全选勾选状态发生改变的监听

@@ -56,19 +56,20 @@ export default {
             data: ids
         })
     },
-    // 获取用户角色
-    toAssign(id) {
+        // 批量删除角色信息
+        batchRemove(ids) {
+            return request({
+                url: `${api_name}/batchRemove`,
+                method: 'post',
+                data: ids
+            })
+        },
+            // 批量删除角色信息
+    batchRemove(ids) {
         return request({
-            url: `${api_name}/toAssign/${id}`,
-            method: 'get',
-        })
-    },
-    // 修改用户角色
-    doAssign(assignRoleVo) {
-        return request({
-            url: `${api_name}/doAssign`,
+            url: `${api_name}/batchRemove`,
             method: 'post',
-            data: assignRoleVo
+            data: ids
         })
     },
 }

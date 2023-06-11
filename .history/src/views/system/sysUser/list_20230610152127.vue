@@ -204,9 +204,7 @@
         <el-button type="primary" @click="assignRole" size="small"
           >保存</el-button
         >
-        <el-button @click="dialogRoleVisible = false" size="small"
-          >取消</el-button
-        >
+        <el-button @click="dialogRoleVisible = false" size="small">取消</el-button>
       </div>
     </el-dialog>
   </div>
@@ -454,8 +452,8 @@ export default {
         this.userRoleIds = assignSysRoles.map((item) => item.id);
         this.checkAll = allSysRoles.length === assignSysRoles.length;
         this.isIndeterminate =
-          assignSysRoles.length > 0 &&
-          assignSysRoles.length < allSysRoles.length;
+        assignSysRoles.length > 0 &&
+        assignSysRoles.length < allSysRoles.length;
       });
     },
     //全选勾选状态发生改变的监听

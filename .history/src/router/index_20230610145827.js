@@ -64,14 +64,6 @@ export const constantRoutes = [
     alwaysShow: true,
     children: [
       {
-        path: 'sysUser',
-        component: () => import('@/views/system/sysUser/list'),
-        meta: {
-          title: '用户管理',
-          icon: 'el-icon-s-custom'
-        },
-      },
-      {
         path: 'sysRole',
         component: () => import('@/views/system/sysRole/list'),
         meta: {
@@ -81,24 +73,51 @@ export const constantRoutes = [
       },
 
       {
-        path: 'sysMenu',
-        component:() => import('@/views/system/sysMenu/list'),
-        meta:{
-          title: '菜单管理',
-          icon: 'el-icon-s-unfold'
+        path: 'sysUser',
+        component: () => import('@/views/system/sysUser/list'),
+        meta: {
+          title: '用户管理',
+          icon: 'el-icon-s-custom'
         },
       },
+    ]
+  },
+  {
+    path: '/example',
+    component: Layout,
+    redirect: '/example/table',
+    name: 'Example',
+    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    children: [
       {
-        path: 'assignAuth',
-        component: () => import('@/views/system/sysRole/assignAuth'),
-        meta: {
-          activeMenu: '/system/sysRole',
-          title: '角色授权'
-        },
-        hidden: true,
+        path: 'table',
+        name: 'Table',
+        component: () => import('@/views/table/index'),
+        meta: { title: 'Table', icon: 'table' }
+      },
+      {
+        path: 'tree',
+        name: 'Tree',
+        component: () => import('@/views/tree/index'),
+        meta: { title: 'Tree', icon: 'tree' }
       }
     ]
   },
+
+  {
+    path: '/form',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Form',
+        component: () => import('@/views/form/index'),
+        meta: { title: 'Form', icon: 'form' }
+      }
+    ]
+  },
+
+  
 
   {
     path: 'external-link',

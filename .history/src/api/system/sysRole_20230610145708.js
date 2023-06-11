@@ -63,7 +63,7 @@ export default {
             method: 'get',
         })
     },
-    // 修改用户角色
+    // 批量删除角色信息
     doAssign(assignRoleVo) {
         return request({
             url: `${api_name}/doAssign`,

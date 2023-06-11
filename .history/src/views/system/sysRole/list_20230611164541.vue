@@ -161,11 +161,9 @@ export default {
     this.fetchData();
   },
   methods: {
-    // 跳转到分配菜单的页面
-    showAssignAuth(row) {
-      this.$router.push(
-        "/system/assignAuth?id=" + row.id + "&roleName=" + row.roleName
-      );
+        // 跳转到分配菜单的页面
+        showAssignAuth(row) {
+    this.$router.push('/system/assignAuth?id='+row.id+'&roleName='+row.roleName);
     },
 
     // 当页码发生改变的时候

@@ -80,13 +80,8 @@
             @click="removeDataById(scope.row.id)"
             title="删除"
           />
-          <el-button
-            type="warning"
-            icon="el-icon-baseball"
-            size="mini"
-            @click="showAssignAuth(scope.row)"
-            title="分配权限"
-          />
+          <el-button type="warning" icon="el-icon-baseball" size="mini" @click="showAssignAuth(scope.row)" title="分配权限"/>
+
         </template>
       </el-table-column>
     </el-table>
@@ -102,6 +97,7 @@
       @current-change="fetchData"
       @size-change="changeSize"
     />
+
 
     <!-- 弹框 -->
     <el-dialog :title="roleTitle" :visible.sync="dialogVisible" width="40%">
@@ -161,13 +157,6 @@ export default {
     this.fetchData();
   },
   methods: {
-    // 跳转到分配菜单的页面
-    showAssignAuth(row) {
-      this.$router.push(
-        "/system/assignAuth?id=" + row.id + "&roleName=" + row.roleName
-      );
-    },
-
     // 当页码发生改变的时候
     changeSize(size) {
       console.log(size);
@@ -271,24 +260,22 @@ export default {
       });
     },
     batchRemove() {
-      if (this.multipleSelection.length == 0) {
+      if(this.multipleSelection.length ==0){
         this.$message.warning("请选择要批量删除的内容");
-        return;
+        return
       }
       this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
+        confirmButtonText : "确定",
+        cancelButtonText : "取消",
         type: "warning",
-      })
-        .then(() => {
-          //数组形式传递id值
-          var idList = [];
-          this.multipleSelection.forEach((item) => {
-            idList.push(item.id);
-          });
-          return api.batchRemove(idList);
+      }).then(()=>{
+        //数组形式传递id值
+        var idList = [];
+        this.multipleSelection.forEach(item =>{
+          idList.push(item.id)
         })
-        .then((response) => {
+        return api.batchRemove(idList)
+      }).then((response) => {
           this.fetchData();
           this.$message({
             type: "success",

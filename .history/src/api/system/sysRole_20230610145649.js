@@ -56,14 +56,15 @@ export default {
             data: ids
         })
     },
-    // 获取用户角色
+    // 批量删除角色信息
     toAssign(id) {
         return request({
             url: `${api_name}/toAssign/${id}`,
-            method: 'get',
+            method: 'post',
+            data: ids
         })
     },
-    // 修改用户角色
+    // 批量删除角色信息
     doAssign(assignRoleVo) {
         return request({
             url: `${api_name}/doAssign`,
