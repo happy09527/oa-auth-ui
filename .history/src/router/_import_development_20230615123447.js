@@ -1,0 +1,1 @@
+module.exports = file=>require=>import('@/views'+file+'.vue')
