@@ -86,7 +86,7 @@ export default {
     //   }
     // }
     const validateUsername = (rule, value, callback) => {
-      if (value.length < 4) {
+      if (value.length < 3) {
         callback(new Error("Please enter the correct user name"));
       } else {
         callback();
