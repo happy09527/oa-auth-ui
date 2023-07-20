@@ -4,7 +4,7 @@ export function login(data) {
   return request({
     url: '/admin/system/index/login',
     method: 'post',
-    data
+    data: data
   })
 }
 
@@ -18,7 +18,15 @@ export function getInfo(token) {
 
 export function logout() {
   return request({
-    url: '/user/logout',
+    url: '/admin/system/index/logout',
     method: 'post'
   })
 }
+
+// export function bindPhone(bindPhoneVo) {
+//   return request({
+//     url: `/admin/wechat/bindPhone`,
+//     method: 'post',
+//     data: bindPhoneVo
+//   })
+// }

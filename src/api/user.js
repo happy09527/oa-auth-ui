@@ -22,3 +22,11 @@ export function logout() {
     method: 'post'
   })
 }
+
+// export function bindPhone(bindPhoneVo) {
+//   return request({
+//     url: `/admin/wechat/bindPhone`,
+//     method: 'post',
+//     data: bindPhoneVo
+//   })
+// }
